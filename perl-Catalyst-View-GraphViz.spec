@@ -1,23 +1,22 @@
-%define realname   Catalyst-View-GraphViz
-%define version    0.05
-%define release    %mkrel 3
+%define upstream_name    Catalyst-View-GraphViz
+%define upstream_version 0.05
 
-Name:       perl-%{realname}
-Version:    %{version}
-Release:    %{release}
-License:    GPL or Artistic
-Group:      Development/Perl
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+
 Summary:    GraphViz View Class
-Source:     http://www.cpan.org/modules/by-module/Catalyst/%{realname}-%{version}.tar.gz
-Url:        http://search.cpan.org/dist/%{realname}
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: perl-devel
+License:    GPL+ or Artistic
+Group:      Development/Perl
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source0:    http://www.cpan.org/modules/by-module/Catalyst/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires: perl(Catalyst)
 BuildRequires: perl(Catalyst::Plugin::SubRequest)
 BuildRequires: perl(GraphViz)
 BuildRequires: perl(Test::More)
-
 BuildArch: noarch
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This is the Catalyst view class for the GraphViz manpage. Your application
@@ -31,7 +30,7 @@ GraphViz manpage module. PNG is the default format.
 The output is stored in '$c->response->output'.
 
 %prep
-%setup -q -n %{realname}-%{version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -52,4 +51,3 @@ rm -rf $RPM_BUILD_ROOT
 %doc Changes META.yml README
 %{_mandir}/man3/*
 %perl_vendorlib/*
-
